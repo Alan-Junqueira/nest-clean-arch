@@ -1,4 +1,14 @@
-@baseUrl = http://127.0.0.1:3333/
+@baseUrl = http://127.0.0.1:3333
 
 ###
 GET {{baseUrl}}
+
+###
+POST {{baseUrl}}/accounts
+Content-Type: application/json
+
+{
+  "name": "Alan",
+  "email": "teste@email.com",
+  "password": "123456"
+}
