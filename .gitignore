@@ -39,3 +39,9 @@ lerna-debug.log*
 
 # Docker
 data
+
+# Anotações
+anotacoes.md
+
+# Keys
+*.pem
