@@ -1,0 +1,21 @@
+import { UniqueEntityId } from "@/core/entity/unique-entity-id";
+import {
+  IQuestionAttachmentProps,
+  QuestionAttachment,
+} from "@/domain/forum/enterprise/entities/question-attachment";
+
+export function makeQuestionAttachment(
+  override: Partial<IQuestionAttachmentProps> = {},
+  id?: UniqueEntityId
+) {
+  const questionAttachment = QuestionAttachment.create(
+    {
+      questionId: new UniqueEntityId(),
+      attachmentId: new UniqueEntityId(),
+      ...override,
+    },
+    id
+  );
+
+  return questionAttachment;
+}
