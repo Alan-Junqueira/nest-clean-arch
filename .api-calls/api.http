@@ -28,7 +28,7 @@ Authorization: Bearer {{authToken}}
 Content-Type: application/json
 
 {
-  "title": "Nova pergunta ",
+  "title": "Nova pergunta 2",
   "content": "lorem ipsum dolor"
 }
 
