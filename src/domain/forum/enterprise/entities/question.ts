@@ -13,7 +13,7 @@ export interface IQuestionProps {
   slug: Slug
   title: string
   createdAt: Date
-  updatedAt?: Date
+  updatedAt?: Date | null
 
   attachments: QuestionAttachmentList
 }
