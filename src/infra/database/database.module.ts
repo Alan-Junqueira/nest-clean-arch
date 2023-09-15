@@ -7,28 +7,35 @@ import { PrismaQuestionAttachmentsRepository } from './prisma/repositories/prism
 import { PrismaQuestionCommentsRepository } from './prisma/repositories/prisma-question-comments-repository'
 import { PrismaQuestionsRepository } from './prisma/repositories/prisma-questions-repository'
 import { IQuestionsRepository } from '@/domain/forum/application/repositories/questions-repository'
+import { IStudentsRepository } from '@/domain/forum/application/repositories/students-repository'
+import { PrismaStudentsRepository } from './prisma/repositories/prisma-students-repository'
 
 @Module({
   providers: [
     PrismaService,
+    {
+      provide: IQuestionsRepository,
+      useClass: PrismaQuestionsRepository,
+    },
+    {
+      provide: IStudentsRepository,
+      useClass: PrismaStudentsRepository,
+    },
     PrismaAnswerAttachmentsRepository,
     PrismaAnswerCommentsRepository,
     PrismaAnswersRepository,
     PrismaQuestionAttachmentsRepository,
     PrismaQuestionCommentsRepository,
-    {
-      provide: IQuestionsRepository,
-      useClass: PrismaQuestionsRepository,
-    },
   ],
   exports: [
+    IQuestionsRepository,
+    IStudentsRepository,
     PrismaService,
     PrismaAnswerAttachmentsRepository,
     PrismaAnswerCommentsRepository,
     PrismaAnswersRepository,
     PrismaQuestionAttachmentsRepository,
     PrismaQuestionCommentsRepository,
-    IQuestionsRepository,
   ],
 })
 export class DatabaseModule {}
