@@ -2,6 +2,7 @@ import { CurrentUser } from '@/infra/auth/current-user.decorator'
 import { JwtAuthGuard } from '@/infra/auth/jwt-auth.guard'
 import { TUserPayload } from '@/infra/auth/jwt.strategy'
 import {
+  BadRequestException,
   Body,
   Controller,
   HttpCode,
@@ -37,11 +38,15 @@ export class CreateQuestionController {
     const { content, title } = body
     const { sub: userId } = user
 
-    await this.createQuestion.execute({
+    const result = await this.createQuestion.execute({
       title,
       content,
       authorId: userId,
       attachmentIds: [],
     })
+
+    if (result.isLeft()) {
+      throw new BadRequestException()
+    }
   }
 }
