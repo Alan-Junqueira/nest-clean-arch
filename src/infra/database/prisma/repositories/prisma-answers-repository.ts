@@ -20,7 +20,7 @@ export class PrismaAnswersRepository implements IAnswersRepository {
   async delete(answer: Answer): Promise<void> {
     const { id } = PrismaAnswerMapper.toPrisma(answer)
 
-    await this.prisma.question.delete({
+    await this.prisma.answer.delete({
       where: {
         id,
       },
