@@ -1,23 +1,25 @@
-import { Either, left, right } from "@/core/either";
-import { QuestionComment } from "../../enterprise/entities/question-comment";
-import { IQuestionCommentsRepository } from "../repositories/question-comments-repository";
-import { ResourceNotFoundError } from "@/core/errors/errors/resource-not-found-error";
+import { Either, left, right } from '@/core/either'
+import { QuestionComment } from '../../enterprise/entities/question-comment'
+import { IQuestionCommentsRepository } from '../repositories/question-comments-repository'
+import { ResourceNotFoundError } from '@/core/errors/errors/resource-not-found-error'
+import { Injectable } from '@nestjs/common'
 
 interface IFetchQuestionCommentsRequest {
-  page: number;
-  questionId: string;
+  page: number
+  questionId: string
 }
 
 type IFetchQuestionCommentsResponse = Either<
   ResourceNotFoundError,
   {
-    questionComments: QuestionComment[];
+    questionComments: QuestionComment[]
   }
->;
+>
 
+@Injectable()
 export class FetchQuestionCommentsUseCase {
   constructor(
-    private questionCommentsRepository: IQuestionCommentsRepository
+    private questionCommentsRepository: IQuestionCommentsRepository,
   ) {}
 
   async execute({
@@ -27,12 +29,12 @@ export class FetchQuestionCommentsUseCase {
     const questionComments =
       await this.questionCommentsRepository.findManyByQuestionId(questionId, {
         page,
-      });
+      })
 
     if (!questionComments) {
-      return left(new ResourceNotFoundError());
+      return left(new ResourceNotFoundError())
     }
 
-    return right({ questionComments });
+    return right({ questionComments })
   }
 }
