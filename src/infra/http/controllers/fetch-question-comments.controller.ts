@@ -38,6 +38,6 @@ export class FetchQuestionCommentsController {
 
     const { comments } = result.value
 
-    return { questionComments: comments.map(CommentWithAuthorPresenter.toHTTP) }
+    return { comments: comments.map(CommentWithAuthorPresenter.toHTTP) }
   }
 }
