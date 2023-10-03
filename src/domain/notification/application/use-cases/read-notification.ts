@@ -1,20 +1,20 @@
-import { Either, left, right } from "@/core/either";
-import { Notification } from "../../enterprise/entities/notification";
-import { INotificationsRepository } from "../repositories/notifications-repository";
-import { ResourceNotFoundError } from "@/core/errors/errors/resource-not-found-error";
-import { NotAllowedError } from "@/core/errors/errors/not-allowed-error";
+import { Either, left, right } from '@/core/either'
+import { Notification } from '../../enterprise/entities/notification'
+import { INotificationsRepository } from '../repositories/notifications-repository'
+import { ResourceNotFoundError } from '@/core/errors/errors/resource-not-found-error'
+import { NotAllowedError } from '@/core/errors/errors/not-allowed-error'
 
 interface IReadNotificationUseCaseRequest {
-  recipientId: string;
-  notificationId: string;
+  recipientId: string
+  notificationId: string
 }
 
 type IReadNotificationUseCaseResponse = Either<
   ResourceNotFoundError | NotAllowedError,
   {
-    notification: Notification;
+    notification: Notification
   }
->;
+>
 
 export class ReadNotificationUseCase {
   constructor(private notificationsRepository: INotificationsRepository) {}
@@ -23,22 +23,21 @@ export class ReadNotificationUseCase {
     notificationId,
     recipientId,
   }: IReadNotificationUseCaseRequest): Promise<IReadNotificationUseCaseResponse> {
-    const notification = await this.notificationsRepository.findById(
-      notificationId
-    );
+    const notification =
+      await this.notificationsRepository.findById(notificationId)
 
     if (!notification) {
-      return left(new ResourceNotFoundError());
+      return left(new ResourceNotFoundError())
     }
 
     if (recipientId !== notification.recipientId.toString()) {
-      throw left(new NotAllowedError());
+      throw left(new NotAllowedError())
     }
 
-    notification.read();
+    notification.read()
 
-    await this.notificationsRepository.save(notification);
+    await this.notificationsRepository.save(notification)
 
-    return right({ notification });
+    return right({ notification })
   }
 }

@@ -4,7 +4,7 @@ export class Slug {
     this.value = value
   }
 
-  static create(slug: string){
+  static create(slug: string) {
     return new Slug(slug)
   }
 
