@@ -4,7 +4,7 @@ import { Slug } from './value-objects/slug'
 import dayjs from 'dayjs'
 import { AggregateRoot } from '@/core/entity/aggregate-root'
 import { QuestionAttachmentList } from './question-attachment-list'
-import { QuestionBestAnswerChosenEvent } from '../events/question-best-answer-chooen-event'
+import { QuestionBestAnswerChosenEvent } from '../events/question-best-answer-chosen-event'
 
 export interface IQuestionProps {
   authorId: UniqueEntityId
